@@ -6,12 +6,15 @@ plugins:
 custom:
   pythonRequirements:
     dockerizePip: false
+  STAGE: ${opt:stage}
+  myRegion:
+    prod: us-west-2
+    dev: us-west-1
 
 provider:
   name: aws
   runtime: python3.6
-  stage: dev
-  region: us-west-1
+  region: ${self:custom.myRegion.${opt:stage}}
 
 functions:
   hello:
